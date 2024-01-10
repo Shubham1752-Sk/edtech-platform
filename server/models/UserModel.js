@@ -37,7 +37,7 @@ const userSchema = new mongoose.Schema({
     image: {
         type: String,
     },
-    additionalDetails: {
+    additionalInfo: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: "Profile",

@@ -2,6 +2,7 @@ import React, { useState,useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { ToastContainer,toast } from 'react-toastify'
+import { login } from '../../../services/operations/AuthAPI'
 import 'react-toastify/dist/ReactToastify.min.css';
 
 // import { login } from '../../../services/operations/authAPI'
@@ -9,7 +10,7 @@ import 'react-toastify/dist/ReactToastify.min.css';
 
 const LoginForm = () => {
 
-//   const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate()
 
   const [ formData, setFormData ] = useState({
@@ -26,23 +27,23 @@ const LoginForm = () => {
 
   const {token} = useSelector((state)=>state.auth)
 
-  useEffect(()=>{
-    // console.log(token)
-    if(token){
+  // useEffect(()=>{
+  //   // console.log(token)
+  //   if(token){
       
-      navigate("/")
-    }
-    else{
-        toast.info("No Token Found")
-    }
-  })
+  //     navigate("/")
+  //   }
+  //   else{
+  //       toast.info("No Token Found")
+  //   }
+  // })
 
   const loginHandler = (e) =>{
     e.preventDefault();
 
     console.log(formData)
 
-    // dispatch(login(formData.email, formData.password, navigate))
+    dispatch(login(formData.email, formData.password, navigate))
   }
 
   return (

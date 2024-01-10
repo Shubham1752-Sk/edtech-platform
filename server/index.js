@@ -5,6 +5,7 @@ const {connectToDB} = require("./config/database")
 
 // routes
 const AuthRoutes = require("./routes/AuthRoutes")
+const ProfileRoutes = require("./routes/ProfileRoutes")
 
 dotenv.config()
 const app = express()
@@ -16,6 +17,7 @@ app.use(cors({
     methods: ['GET','POST']
 }))
 app.use('/api/v1/auth',AuthRoutes)
+app.use('/api/v1/profile',ProfileRoutes)
 
 // connections
 connectToDB()

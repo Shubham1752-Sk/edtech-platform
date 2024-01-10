@@ -2,19 +2,23 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
-import { sendotp } from "../../../services/operations/authAPI"
+import { sendotp } from "../../../services/operations/AuthAPI"
 import { setSignupData } from "../../../slices/AuthSlice"
+import Tab from '../../common/Tab';
+import { ACCOUNT_TYPE } from '../../../utils/constants';
 
 const SignupForm = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const [accountType, setAccountType] = useState(ACCOUNT_TYPE.STUDENT)
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
     password: "",
+    accountType:"",
     mobileNumber:"",
     confirmPassword: "",
   })
@@ -37,7 +41,10 @@ const SignupForm = () => {
       return
     }
 
-    const signupData = { ...formData };
+    // console.log(formData)
+
+    const signupData = { ...formData, accountType:accountType };
+    console.log(signupData)
 
     // console.log(`Signnup data is: ${JSON.stringify(signupData)}`,)
     // console.log(`formdata is: ${JSON.stringify(formData) }`,formData)
@@ -60,13 +67,30 @@ const SignupForm = () => {
       confirmPassword: "",
     })
 
+    setAccountType(ACCOUNT_TYPE.STUDENT)
+
   }
 
+  const tabData = [
+    {
+      id: 1,
+      tabName: "Student",
+      type: ACCOUNT_TYPE.STUDENT,
+    },
+    {
+      id: 2,
+      tabName: "Instructor",
+      type: ACCOUNT_TYPE.INSTRUCTOR,
+    },
+  ]
+
   return (
-    <form onSubmit={SignupHandler}>
+    <div className=''>
+      <form onSubmit={SignupHandler}>
       <div className=' h-full flex flex-col justify-center p-6 md:px-14 outline-1 text-gray-300 outline-white outline-double rounded-tl-lg rounded-bl-lg '>
       <span className='mt-2 text-4xl md:text-3xl font-bold'>Welcome</span>
       <span className='font-light text-gray-400 mb-8'>Please Enter Your details</span>
+      <Tab tabData={tabData} field={accountType} setField={setAccountType} />
       <div className='flex w-full space-x-4'>
         <div className='py-2 w-1/2'>
           <span className='mb-2 text-md'>First Name <span className=' text-orange-2'>*</span></span>
@@ -110,6 +134,7 @@ const SignupForm = () => {
       </div>
     </div>
     </form>
+    </div>
   )
 }
 

@@ -11,8 +11,8 @@ const profileSchema = new mongoose.Schema({
 		type: String,
 		trim: true,
 	},
-	contactNumber: {
-		type: Number,
+	mobileNumber: {
+		type: String,
         unique: true,
 		trim: true,
 	},
