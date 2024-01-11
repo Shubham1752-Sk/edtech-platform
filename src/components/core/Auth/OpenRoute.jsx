@@ -4,8 +4,9 @@ import { Navigate } from "react-router-dom"
 
 function OpenRoute({ children }) {
   const { token } = useSelector((state) => state.auth)
+  console.log(children)
 
-  if (token === null) {
+  if (token === null ) {
     return children
   } else {
     return <Navigate to="/dashboard/my-profile" />

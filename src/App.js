@@ -15,7 +15,10 @@ import OpenRoute from "./components/core/Auth/OpenRoute"
 import PrivateRoute from "./components/core/Auth/PrivateRoute"
 import MyProfile from './components/core/Dashboard/MyProfile';
 import AddCourse from './components/core/Dashboard/AddCourse';
+import AddCategory from "./components/core/Dashboard/AddCategory"
+
 import { getUserDetails } from './services/operations/ProfileApi';
+import { ACCOUNT_TYPE } from './utils/constants';
 
 function App() {
 
@@ -46,7 +49,7 @@ function App() {
         <Route
           path="signup"
           element={
-            <OpenRoute>
+            <OpenRoute user={user}>
               <Signup />
             </OpenRoute>
           }
@@ -66,7 +69,18 @@ function App() {
         }>
           {/* links for all users */}
           <Route path='/dashboard/my-profile' element={<MyProfile />} />
-          <Route path='/dashboard/add-course' element={<AddCourse />} />
+          
+          {user?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
+            <>
+              <Route path="dashboard/add-course" element={<AddCourse />} />
+            </>
+          )}
+
+          { user?.accountType === ACCOUNT_TYPE.ADMIN &&(
+            <>
+              <Route path='dashboard/add-category' element={<AddCategory />} />
+            </>
+          )}
           
         </Route>
         

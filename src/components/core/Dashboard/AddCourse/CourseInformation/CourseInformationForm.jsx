@@ -5,11 +5,14 @@ import { HiOutlineCurrencyRupee } from "react-icons/hi"
 import { MdNavigateNext } from "react-icons/md"
 import { useDispatch, useSelector } from "react-redux"
 
-// import {
-//   addCourseDetails,
-//   editCourseDetails,
-//   fetchCourseCategories,
-// } from "../../../../../services/operations/courseDetailsAPI"
+import {
+  addCourseDetails,
+  editCourseDetails,
+  
+} from "../../../../../services/operations/CourseAPI"
+import {
+  fetchCourseCategories,
+} from "../../../../../services/operations/CategoryAPI"
 import { setCourse, setStep } from "../../../../../slices/CourseSlice"
 import { COURSE_STATUS } from "../../../../../utils/constants"
 import IconBtn from "../../../../common/IconBtn"
@@ -35,14 +38,13 @@ export default function CourseInformationForm() {
   useEffect(() => {
     const getCategories = async () => {
       setLoading(true)
-      // let categories
 
-      // const categories = await fetchCourseCategories()
-      // if (categories.length > 0) {
-      //   // console.log("categories", categories)
-      //   setCourseCategories(categories)
-      // }
-      // setLoading(false)
+      const categories = await fetchCourseCategories()
+      if (categories.length > 0) {
+        // console.log("categories", categories)
+        setCourseCategories(categories)
+      }
+      setLoading(false)
     }
     // if form is in edit mode
     if (editCourse) {
@@ -82,8 +84,8 @@ export default function CourseInformationForm() {
 
   //   handle next button click
   const onSubmit = async (data) => {
-    // console.log(data)
-
+    console.log(data)
+    
     if (editCourse) {
       // const currentValues = getValues()
       // console.log("changes after editing form values:", currentValues)
@@ -150,8 +152,21 @@ export default function CourseInformationForm() {
     formData.append("instructions", JSON.stringify(data.courseRequirements))
     formData.append("thumbnailImage", data.courseImage)
     setLoading(true)
-    // const result = await addCourseDetails(formData, token)
-    let result
+    const payloadData ={
+      courseName: data.courseTitle,
+      courseDescription: data.courseShortDesc,
+      price: data.coursePrice,
+      tag: data.courseTags,
+      whatYouWillLearn: data.courseBenefits,
+      category: data.courseCategory,
+      status: COURSE_STATUS.DRAFT,
+      instructions: data.courseRequirements,
+      thumbnail: data.courseImage
+    }
+    console.log(payloadData)
+
+    const result = await addCourseDetails(payloadData, token)
+    
     if (result) {
       dispatch(setStep(2))
       dispatch(setCourse(result))

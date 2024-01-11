@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import { sendotp } from "../../../services/operations/AuthAPI"
 import { setSignupData } from "../../../slices/AuthSlice"
@@ -12,6 +12,8 @@ const SignupForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const {user} = useSelector((state)=>state.profile)
+  console.log(user)
   const [accountType, setAccountType] = useState(ACCOUNT_TYPE.STUDENT)
   const [formData, setFormData] = useState({
     firstName: "",
@@ -82,6 +84,7 @@ const SignupForm = () => {
       tabName: "Instructor",
       type: ACCOUNT_TYPE.INSTRUCTOR,
     },
+    
   ]
 
   return (
