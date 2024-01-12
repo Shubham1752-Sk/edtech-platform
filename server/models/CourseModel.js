@@ -10,7 +10,7 @@ const courseSchema = new mongoose.Schema({
     instructor: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: "user",
+        ref: "User",
     },
     whatYouWillLearn: {
         type: String,
@@ -25,6 +25,9 @@ const courseSchema = new mongoose.Schema({
     tag: {
         type: [String],
         required: true,
+    },
+    instructions: {
+        type: [String],
     },
     category: {
         type: mongoose.Schema.Types.ObjectId,
@@ -43,10 +46,16 @@ const courseSchema = new mongoose.Schema({
             ref: "user",
         },
     ],
+    ratingAndReviews: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "RatingAndReview",
+        },
+    ],
     createdAt: {
         type: Date,
         default: Date.now
     },
 })
 
-module.exports = mongoose.model('Course',courseSchema)
+module.exports = mongoose.model('Course', courseSchema)

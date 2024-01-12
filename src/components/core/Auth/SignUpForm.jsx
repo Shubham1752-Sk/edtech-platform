@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import { sendotp } from "../../../services/operations/AuthAPI"
 import { setSignupData } from "../../../slices/AuthSlice"
@@ -12,8 +12,6 @@ const SignupForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const {user} = useSelector((state)=>state.profile)
-  console.log(user)
   const [accountType, setAccountType] = useState(ACCOUNT_TYPE.STUDENT)
   const [formData, setFormData] = useState({
     firstName: "",
@@ -97,30 +95,30 @@ const SignupForm = () => {
       <div className='flex w-full space-x-4'>
         <div className='py-2 w-1/2'>
           <span className='mb-2 text-md'>First Name <span className=' text-orange-2'>*</span></span>
-          <input required type='text' onChange={handleFormData} className=' w-full p-2 border border-gray-300 rounded-md placeholder:font-light placeholder:text-gray-500' name='firstName' id="fname" value={formData.firstName} />
+          <input required type='text' onChange={handleFormData} className=' w-full p-2 border border-gray-300 rounded-md placeholder:font-light ' name='firstName' id="fname" value={formData.firstName} />
         </div>
         <div className='py-2 w-1/2'>
           <span className='mb-2 text-md'>Last Name</span>
-          <input type='text' onChange={handleFormData} className=' w-full p-2 border border-gray-300 rounded-md placeholder:font-light placeholder:text-gray-500' name='lastName' id="lastName" value={formData.lastName} />
+          <input type='text' onChange={handleFormData} className=' w-full p-2 border border-gray-300 rounded-md placeholder:font-light ' name='lastName' id="lastName" value={formData.lastName} />
         </div>
       </div>
       <div className='flex w-full space-x-4'>
         <div className='py-2 w-1/2'>
           <span className='mb-2 text-md'>E-mail <span className=' text-orange-2'>*</span></span>
-          <input required type='text' onChange={handleFormData} className=' w-full p-2 border border-gray-300 rounded-md placeholder:font-light placeholder:text-gray-500' name='email' id="email" value={formData.email} />
+          <input required type='text' onChange={handleFormData} className=' w-full p-2 border border-gray-300 rounded-md placeholder:font-light ' name='email' id="email" value={formData.email} />
         </div>
         <div className='py-2 w-1/2'>
           <span className='mb-2 text-md'>Mobile No.</span>
-          <input type='text' onChange={handleFormData} className=' w-full p-2 border border-gray-300 rounded-md placeholder:font-light placeholder:text-gray-500' name='mobileNumber' id="mobileNumber" value={formData.mobileNumber} />
+          <input type='text' onChange={handleFormData} className=' w-full p-2 border border-gray-300 rounded-md placeholder:font-light ' name='mobileNumber' id="mobileNumber" value={formData.mobileNumber} />
         </div>
       </div>
       <div className=' py-2'>
         <span className='mb-2 text-md'>Password <span className=' text-orange-2'>*</span></span>
-        <input required type="password" onChange={handleFormData} name="password" id="pass" value={formData.password} className=' w-full p-2 border border-gray-300 rounded-md placeholder:font-light placeholder:text-gray-500' />
+        <input required type="password" onChange={handleFormData} name="password" id="pass" value={formData.password} className=' w-full p-2 border border-gray-300 rounded-md placeholder:font-light ' />
       </div>
       <div className=' py-2'>
         <span className='mb-2 text-md'>Confirm Password <span className=' text-orange-2'>*</span></span>
-        <input required type="password" onChange={handleFormData} name="confirmPassword" id="cpass" value={formData.confirmPassword} className=' w-full p-2 border border-gray-300 rounded-md placeholder:font-light placeholder:text-gray-500' />
+        <input required type="password" onChange={handleFormData} name="confirmPassword" id="cpass" value={formData.confirmPassword} className=' w-full p-2 border border-gray-300 rounded-md placeholder:font-light ' />
       </div>
       {/* <div className='flex justify-between w-full py-4'>
                                         <div className=" mr-24">

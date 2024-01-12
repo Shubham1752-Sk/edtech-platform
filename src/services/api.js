@@ -22,5 +22,31 @@ export const categoryEndpoints = {
 }
 
 export const courseEndpoints = {
-    ADD_NEW_COURSE: BASE_URL + "/api/v1/course/addcourse"
+    CREATE_COURSE_API: BASE_URL + "/api/v1/course/addcourse",
+    EDIT_COURSE_API: BASE_URL + "/api/v1/course/editcourse",
+    CREATE_SECTION_API: BASE_URL + "/api/v1/course/addSection",
+    CREATE_SUBSECTION_API: BASE_URL + "/api/v1/course/addsubsection",
+    UPDATE_SECTION_API: BASE_URL + "/api/v1/course/updatesection",
+    UPDATE_SUBSECTION_API: BASE_URL + "/api/v1/course/updatesubsection",
+    DELETE_SECTION_API: BASE_URL + "/api/v1/course/deletesection",
+    DELETE_SUBSECTION_API: BASE_URL + "/api/v1/course/deletesubsection",
+    DELETE_COURSE_API: BASE_URL + "/api/v1/course/deletecourse",
+    GET_ALL_INSTRUCTOR_COURSES_API: BASE_URL + "/api/v1/course/getInstructorCourses"
+}
+
+export const ratingsEndpoints = {
+    REVIEWS_DETAILS_API: BASE_URL + "/course/getReviews",
+}
+
+export const studentEndpoints = {
+    COURSE_PAYMENT_API: BASE_URL + "/payment/capturePayment",
+    COURSE_VERIFY_API: BASE_URL + "/payment/verifyPayment",
+    SEND_PAYMENT_SUCCESS_EMAIL_API: BASE_URL + "/payment/sendPaymentSuccessEmail",
+  }
+
+export const settingsEndpoints = {
+    UPDATE_DISPLAY_PICTURE_API: BASE_URL + "/profile/updateDisplayPicture",
+    UPDATE_PROFILE_API: BASE_URL + "/profile/updateProfile",
+    CHANGE_PASSWORD_API: BASE_URL + "/auth/changepassword",
+    DELETE_PROFILE_API: BASE_URL + "/profile/deleteProfile",
 }
