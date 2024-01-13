@@ -18,7 +18,8 @@ export const profileEndpoints = {
 
 export const categoryEndpoints = {
     CREATE_CATEGORY: BASE_URL + '/api/v1/category/createcategory',
-    GET_COURSE_CATEGORIES_API: BASE_URL + '/api/v1/category/showAllCategories'
+    GET_COURSE_CATEGORIES_API: BASE_URL + '/api/v1/category/showAllCategories',
+    CATALOG_PAGE_DATA_API: BASE_URL + "/api/v1/category/getCategoryPageDetails",
 }
 
 export const courseEndpoints = {
@@ -31,7 +32,8 @@ export const courseEndpoints = {
     DELETE_SECTION_API: BASE_URL + "/api/v1/course/deletesection",
     DELETE_SUBSECTION_API: BASE_URL + "/api/v1/course/deletesubsection",
     DELETE_COURSE_API: BASE_URL + "/api/v1/course/deletecourse",
-    GET_ALL_INSTRUCTOR_COURSES_API: BASE_URL + "/api/v1/course/getInstructorCourses"
+    GET_ALL_INSTRUCTOR_COURSES_API: BASE_URL + "/api/v1/course/getInstructorCourses",
+    COURSE_DETAILS_API: BASE_URL + '/api/v1/course/getCourseDetails'
 }
 
 export const ratingsEndpoints = {
@@ -42,7 +44,7 @@ export const studentEndpoints = {
     COURSE_PAYMENT_API: BASE_URL + "/payment/capturePayment",
     COURSE_VERIFY_API: BASE_URL + "/payment/verifyPayment",
     SEND_PAYMENT_SUCCESS_EMAIL_API: BASE_URL + "/payment/sendPaymentSuccessEmail",
-  }
+}
 
 export const settingsEndpoints = {
     UPDATE_DISPLAY_PICTURE_API: BASE_URL + "/profile/updateDisplayPicture",
@@ -50,3 +52,7 @@ export const settingsEndpoints = {
     CHANGE_PASSWORD_API: BASE_URL + "/auth/changepassword",
     DELETE_PROFILE_API: BASE_URL + "/profile/deleteProfile",
 }
+
+export const catalogData = {
+    
+  }

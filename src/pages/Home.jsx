@@ -6,7 +6,7 @@ import { Link } from "react-router-dom"
 import Banner from "../assets/Images/banner.mp4"
 // Component Imports
 import Footer from "../components/common/Footer"
-// import ReviewSlider from "../components/common/ReviewSlider"
+import ReviewSlider from "../components/common/ReviewSlider"
 import CTAButton from "../components/core/HomePage/Button"
 import CodeBlocks from "../components/core/HomePage/CodeBlocks"
 import ExploreMore from "../components/core/HomePage/ExploreMore"
@@ -17,7 +17,7 @@ import TimelineSection from "../components/core/HomePage/Timeline"
 
 function Home() {
   return (
-    <div className="bg-slate-400">
+    <div className="bg-[#10133a] text-white">
       {/* Section 1 */}
       <div className="relative mx-auto flex w-11/12 max-w-maxContent flex-col  items-center justify-between gap-8 ">
         {/* Become a Instructor Button */}

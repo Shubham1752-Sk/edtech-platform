@@ -5,6 +5,7 @@ const {
     editCourse,
     deleteCourse,
     getInstructorCourses,
+    getCourseDetails
 } = require('../controllers/CourseControllers')
 
 const {
@@ -39,5 +40,7 @@ router.post("/deletesubsection", auth, isInstructor, deleteSubSection)
 router.post("/addsubsection", auth, isInstructor, createSubSection)
 // Get all Courses Under a Specific Instructor
 router.get("/getInstructorCourses", auth, isInstructor, getInstructorCourses)
+
+router.post("/getCourseDetails", getCourseDetails)
 
 module.exports = router

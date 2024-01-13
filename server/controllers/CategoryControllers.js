@@ -45,6 +45,7 @@ exports.showAllCategories = async (req, res) => {
 
 exports.categoryPageDetails = async (req, res) => {
   try {
+    console.log("In the controller...")
     const { categoryId } = req.body
 
     // Get courses for the specified category
@@ -52,7 +53,7 @@ exports.categoryPageDetails = async (req, res) => {
       .populate({
         path: "courses",
         match: { status: "Published" },
-        populate: "ratingAndReviews",
+        // populate: "ratingAndReviews",
       })
       .exec()
 
@@ -77,16 +78,19 @@ exports.categoryPageDetails = async (req, res) => {
     const categoriesExceptSelected = await Category.find({
       _id: { $ne: categoryId },
     })
-    let differentCategory = await Category.findOne(
-      categoriesExceptSelected[getRandomInt(categoriesExceptSelected.length)]
-        ._id
-    )
-      .populate({
-        path: "courses",
-        match: { status: "Published" },
-      })
-      .exec()
-    console.log()
+    console.log("categoriesExceptSelected: ",categoriesExceptSelected)
+    if(categoriesExceptSelected.length > 0){
+      var differentCategory = await Category.findOne(
+        categoriesExceptSelected[getRandomInt(categoriesExceptSelected.length)]
+          ._id
+      )
+        .populate({
+          path: "courses",
+          match: { status: "Published" },
+        })
+        .exec()
+      console.log(differentCategory)
+    }
     // Get top-selling courses across all categories
     const allCategories = await Category.find()
       .populate({

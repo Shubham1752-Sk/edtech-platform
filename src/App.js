@@ -19,9 +19,13 @@ import AddCategory from "./components/core/Dashboard/AddCategory"
 import MyCourses from "./components/core/Dashboard/MyCourses"
 import EnrolledCourses from "./components/core/Dashboard/EnrolledCourses"
 import Cart from "./components/core/Dashboard/Cart"
+import Catalog from "./pages/Catalog"
+// import Contact from "./pages/Contact"
+import CourseDetails from "./pages/CourseDetails"
 
 import { getUserDetails } from './services/operations/ProfileAPI';
 import { ACCOUNT_TYPE } from './utils/constants';
+import Navbar from './components/common/Navbar';
 
 function App() {
 
@@ -38,9 +42,12 @@ function App() {
   },[])
 
   return (
-    <div className='h-screen w-screen bg-slate-400 ' >
+    <div className="flex min-h-screen w-screen flex-col bg-[#10133a] text-white font-inter">
+      <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />
+        <Route path="courses/:courseId" element={<CourseDetails />} />
+        <Route path="catalog/:catalogName" element={<Catalog />} />
         <Route
           path="login"
           element={
