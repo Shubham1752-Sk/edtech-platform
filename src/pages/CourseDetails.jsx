@@ -13,6 +13,7 @@ import CourseDetailsCard from "../components/core/Course/CourseDetailsCard"
 import { formatDate } from "../services/formatDate"
 import { fetchCourseDetails } from "../services/operations/CourseAPI"
 import { BuyCourse } from "../services/operations/studentFeaturesAPI"
+import { addToCart } from "../slices/CartSlice"
 import GetAvgRating from "../utils/avgRating"
 import Error from "./Error"
 
@@ -177,7 +178,7 @@ function CourseDetails() {
               <button className="yellowButton" onClick={handleBuyCourse}>
                 Buy Now
               </button>
-              <button className="blackButton">Add to Cart</button>
+              <button className="blackButton" onClick={()=>dispatch(addToCart(response?.data?.courseDetails))}>Add to Cart</button>
             </div>
           </div>
           {/* Courses Card */}

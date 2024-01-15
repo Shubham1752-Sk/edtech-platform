@@ -9,6 +9,7 @@ const AuthRoutes = require("./routes/AuthRoutes")
 const ProfileRoutes = require("./routes/ProfileRoutes")
 const CategoryRoutes = require("./routes/CategoryRoutes")
 const CourseRoutes = require("./routes/CourseRoutes")
+const PaymentRoutes = require("./routes/PaymentsRoutes")
 
 dotenv.config()
 const app = express()
@@ -25,6 +26,7 @@ app.use('/api/v1/auth',AuthRoutes)
 app.use('/api/v1/profile',ProfileRoutes)
 app.use('/api/v1/category',CategoryRoutes)
 app.use('/api/v1/course',CourseRoutes)
+app.use('/api/v1/payment',PaymentRoutes)
 
 // connections
 connectToDB()

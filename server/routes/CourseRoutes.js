@@ -1,11 +1,14 @@
 const express = require('express')
-const { auth, isInstructor } = require('../middleware/auth')
+const { auth, isInstructor, isStudent } = require('../middleware/auth')
+
 const {
     createCourse,
     editCourse,
     deleteCourse,
     getInstructorCourses,
-    getCourseDetails
+    getCourseDetails,
+    getFullCourseDetails,
+    updateCourseProgress
 } = require('../controllers/CourseControllers')
 
 const {
@@ -21,7 +24,6 @@ const {
 } = require('../controllers/SubSectionControllers')
 
 const router = express.Router()
-
 
 router.post('/addcourse', auth, isInstructor, createCourse)
 router.post("/editcourse", auth, isInstructor, editCourse)
@@ -42,5 +44,9 @@ router.post("/addsubsection", auth, isInstructor, createSubSection)
 router.get("/getInstructorCourses", auth, isInstructor, getInstructorCourses)
 
 router.post("/getCourseDetails", getCourseDetails)
+
+router.post("/getFullCourseDetails", auth, getFullCourseDetails)
+
+router.post("/updateCourseProgress", auth, isStudent, updateCourseProgress)
 
 module.exports = router

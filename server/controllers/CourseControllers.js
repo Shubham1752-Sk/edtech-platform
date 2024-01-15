@@ -3,6 +3,7 @@ const Category = require("../models/CategoryModel")
 const Section = require("../models/SectionModel")
 const SubSection = require("../models/SubsectionModel")
 const User = require("../models/UserModel")
+const CourseProgress = require("../models/CourseProgressModel")
 const { uploadImageToCloudinary } = require("../utils/imageUploader")
 const { convertSecondsToDuration} = require("../utils/secToDuration")
 
@@ -342,5 +343,118 @@ exports.getCourseDetails = async (req, res) => {
       success: false,
       message: error.message,
     })
+  }
+}
+
+exports.getFullCourseDetails = async (req, res) => {
+  try {
+    const { courseId } = req.body
+    const userId = req.user.id
+    const courseDetails = await Course.findOne({
+      _id: courseId,
+    })
+      .populate({
+        path: "instructor",
+        populate: {
+          path: "additionalInfo",
+        },
+      })
+      .populate("category") // .populate("ratingAndReviews")
+      .populate({
+        path: "courseContent",
+        populate: {
+          path: "subSection",
+        },
+      })
+      .exec()
+
+    let courseProgressCount = await CourseProgress.findOne({
+      courseID: courseId,
+      userId: userId,
+    })
+
+    console.log("courseProgressCount : ", courseProgressCount)
+
+    if (!courseDetails) {
+      return res.status(400).json({
+        success: false,
+        message: `Could not find course with id: ${courseId}`,
+      })
+    }
+
+    // if (courseDetails.status === "Draft") {
+    //   return res.status(403).json({
+    //     success: false,
+    //     message: `Accessing a draft course is forbidden`,
+    //   });
+    // }
+
+    let totalDurationInSeconds = 0
+    courseDetails.courseContent.forEach((content) => {
+      content.subSection.forEach((subSection) => {
+        const timeDurationInSeconds = parseInt(subSection.timeDuration)
+        totalDurationInSeconds += timeDurationInSeconds
+      })
+    })
+
+    const totalDuration = convertSecondsToDuration(totalDurationInSeconds)
+
+    return res.status(200).json({
+      success: true,
+      data: {
+        courseDetails,
+        totalDuration,
+        completedVideos: courseProgressCount?.completedVideos
+          ? courseProgressCount?.completedVideos
+          : [],
+      },
+    })
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    })
+  }
+}
+exports.updateCourseProgress = async (req, res) => {
+  const { courseId, subsectionId } = req.body
+  const userId = req.user.id
+
+  try {
+    // Check if the subsection is valid
+    const subsection = await SubSection.findById(subsectionId)
+    if (!subsection) {
+      return res.status(404).json({ error: "Invalid subsection" })
+    }
+
+    // Find the course progress document for the user and course
+    let courseProgress = await CourseProgress.findOne({
+      courseID: courseId,
+      userId: userId,
+    })
+
+    if (!courseProgress) {
+      // If course progress doesn't exist, create a new one
+      return res.status(404).json({
+        success: false,
+        message: "Course progress Does Not Exist",
+      })
+    } else {
+      // If course progress exists, check if the subsection is already completed
+      if (courseProgress.completedVideos.includes(subsectionId)) {
+        return res.status(400).json({ error: "Subsection already completed" })
+      }
+
+      // Push the subsection into the completedVideos array
+      courseProgress.completedVideos.push(subsectionId)
+    }
+
+    // Save the updated course progress
+    await courseProgress.save()
+
+    return res.status(200).json({ message: "Course progress updated" })
+  } catch (error) {
+    console.error(error)
+    return res.status(500).json({ error: "Internal server error" })
   }
 }

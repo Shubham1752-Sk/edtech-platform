@@ -20,6 +20,8 @@ import MyCourses from "./components/core/Dashboard/MyCourses"
 import EnrolledCourses from "./components/core/Dashboard/EnrolledCourses"
 import Cart from "./components/core/Dashboard/Cart"
 import Catalog from "./pages/Catalog"
+import ViewCourse from './pages/ViewCourse';
+import VideoDetails from './components/core/ViewCourse/VideoDetails';
 // import Contact from "./pages/Contact"
 import CourseDetails from "./pages/CourseDetails"
 
@@ -93,6 +95,7 @@ function App() {
                 element={<EnrolledCourses />}
               />
               <Route path="/dashboard/cart" element={<Cart />} />
+              
             </>
           )}
           { user?.accountType === ACCOUNT_TYPE.ADMIN &&(
@@ -102,6 +105,24 @@ function App() {
           )}
           
         </Route>
+
+        <Route
+          element={
+            <PrivateRoute>
+              <ViewCourse />
+            </PrivateRoute>
+          }
+        >
+          {user?.accountType === ACCOUNT_TYPE.STUDENT && (
+            <>
+              <Route
+                path="view-course/:courseId/section/:sectionId/sub-section/:subSectionId"
+                element={<VideoDetails />}
+              />
+            </>
+          )}
+        </Route>
+
         
       </Routes>
     </div>

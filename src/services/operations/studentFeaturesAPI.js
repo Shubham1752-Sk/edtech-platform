@@ -64,13 +64,20 @@ export async function BuyCourse(
     }
     console.log("PAYMENT RESPONSE FROM BACKEND............", orderResponse.data)
 
+    const payload = orderResponse.data.data ;
+    console.log(payload)
+    console.log(payload.amount)
+    console.log("id: ",payload.id)
+
     // Opening the Razorpay SDK
+    // console.log("key is: ",process.env.REACT_APP_RAZORPAY_KEY)
+    // console.log("type is: ",payload.amount)
     const options = {
-      key: process.env.RAZORPAY_KEY,
-      currency: orderResponse.data.data.currency,
-      amount: `${orderResponse.data.data.amount}`,
-      order_id: orderResponse.data.data.id,
-      name: "StudyNotion",
+      key: process.env.REACT_APP_RAZORPAY_KEY,
+      currency: "INR",
+      amount: Number(payload.amount),
+      order_id: payload.id,
+      name: "Shiksha",
       description: "Thank you for Purchasing the Course.",
       image: rzpLogo,
       prefill: {
@@ -78,7 +85,8 @@ export async function BuyCourse(
         email: user_details.email,
       },
       handler: function (response) {
-        sendPaymentSuccessEmail(response, orderResponse.data.data.amount, token)
+        console.log("response is: ",response)
+        sendPaymentSuccessEmail(response, payload.amount, token)
         verifyPayment({ ...response, courses }, token, navigate, dispatch)
       },
     }
@@ -99,6 +107,7 @@ export async function BuyCourse(
 // Verify the Payment
 async function verifyPayment(bodyData, token, navigate, dispatch) {
   const toastId = toast.loading("Verifying Payment...")
+  console.log("bodyData: ",bodyData)
   dispatch(setPaymentLoading(true))
   try {
     const response = await apiConnector("POST", COURSE_VERIFY_API, bodyData, {
