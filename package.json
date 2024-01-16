@@ -13,6 +13,7 @@
     "concurrently": "^8.2.2",
     "copy-to-clipboard": "^3.3.3",
     "dotenv": "^16.3.1",
+    "env-cmd": "^10.1.0",
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.1",
     "pdf": "^0.1.0",
@@ -40,6 +41,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:staging": "env-cmd -f .env.staging npm run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "server": "cd server  && npm run dev",
