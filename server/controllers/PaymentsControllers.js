@@ -4,10 +4,8 @@ const crypto = require("crypto")
 const User = require("../models/UserModel")
 const mailSender = require("../utils/mailSender")
 const mongoose = require("mongoose")
-const {
-  courseEnrollmentEmail,
-  paymentSuccessEmail
-} = require("../mailTemplates/courseEnrollmentEmail")
+const { courseEnrollmentEmail } = require("../mailTemplates/courseEnrollmentEmail")
+const { paymentSuccessEmail } = require("../mailTemplates/paymentSuccessEmail")
 
 const CourseProgress = require("../models/CourseProgressModel")
 

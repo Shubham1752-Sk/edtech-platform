@@ -49,10 +49,10 @@ export function getUserDetails(token, navigate) {
           Authorization: `Bearer ${token}`,
         }
       )
-      // console.log(
-      //   "GET_USER_ENROLLED_COURSES_API API RESPONSE............",
-      //   response
-      // )
+      console.log(
+        "GET_USER_ENROLLED_COURSES_API API RESPONSE............",
+        response
+      )
   
       if (!response.data.success) {
         throw new Error(response.data.message)

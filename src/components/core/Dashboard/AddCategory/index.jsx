@@ -24,11 +24,14 @@ export default function AddCategory() {
     const currentValues = getValues()
 
     dispatch(createCategory(setLoading, token, currentValues.categoryName, currentValues.categoryDesc ))
+
+    setValue('categoryName','')
+    setValue('categoryDesc','')
   }
 
   return (
     <>
-      <div className="flex-col gap-4 space-y-4 items-center justify-center">
+      <div className="flex-col gap-4 space-y-4 items-center justify-center ">
         <h1 className="text-center text-4xl ">Add Category</h1>
         <form
           onSubmit={handleSubmit(submit)}
@@ -42,7 +45,7 @@ export default function AddCategory() {
               id='categoryName'
               placeholder='Enter Category Name'
               {...register("categoryName", { required: true })}
-              className="form-style w-full p-2 py-4"
+              className="form-style w-full p-2 py-4 text-black"
             />
             {errors.categoryName && (
               <span className="ml-2 text-xs tracking-wide text-pink-200">
@@ -58,7 +61,7 @@ export default function AddCategory() {
               id="courseShortDesc"
               placeholder="Enter Description"
               {...register("categoryDesc")}
-              className="form-style resize-x-none min-h-[130px] w-full border p-2 rounded-md"
+              className="form-style resize-x-none min-h-[130px] w-full border p-2 rounded-md text-black"
             />
             <div className="w-full p-2 flex justify-end">
               <IconBtn

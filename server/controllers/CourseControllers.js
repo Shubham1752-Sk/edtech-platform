@@ -38,8 +38,9 @@ exports.createCourse = async (req, res) => {
     // console.log("price",price)
     // console.log("thumbnail",thumbnail)
     // console.log("category",category)
-    console.log("instructions",instructions)
-
+    // console.log("instructions",instructions)
+    console.log("status: ",status)
+    // return
     // Check if any of the required fields are missing
     if (
       !courseName ||
@@ -59,6 +60,8 @@ exports.createCourse = async (req, res) => {
     if (!status || status === undefined) {
       status = "Draft"
     }
+    // console.log("status is: ",status)
+    // return
     // Check if the user is an instructor
     const instructorDetails = await User.findById(userId, {
       accountType: "Instructor",
@@ -151,7 +154,8 @@ exports.editCourse = async (req, res) => {
     if (!course) {
       return res.status(404).json({ error: "Course not found" })
     }
-
+    course.toObject()
+    console.log("course is: ",course)
     // If Thumbnail Image is found, update it
     if (thumbnail) {
       console.log("thumbnail update")
@@ -169,11 +173,12 @@ exports.editCourse = async (req, res) => {
         if (key === "tag" || key === "instructions") {
           course[key] = JSON.parse(updates[key])
         } else {
+          console.log(`Course key is ${course[key]} update key is ${updates[key]}`)
           course[key] = updates[key]
         }
       }
     }
-
+    // return
     await course.save()
 
     const updatedCourse = await Course.findOne({
@@ -193,6 +198,10 @@ exports.editCourse = async (req, res) => {
         },
       })
       .exec()
+
+      console.log(updatedCourse)
+
+      // return
 
     res.json({
       success: true,
@@ -394,6 +403,14 @@ exports.getFullCourseDetails = async (req, res) => {
       content.subSection.forEach((subSection) => {
         const timeDurationInSeconds = parseInt(subSection.timeDuration)
         totalDurationInSeconds += timeDurationInSeconds
+      })
+    })
+
+    let SubsectionLength = 0
+
+    courseDetails.courseContent.forEach((content)=>{
+      content.subSection.forEach((subSection)=>{
+        SubsectionLength+=content.subSection.length;
       })
     })
 

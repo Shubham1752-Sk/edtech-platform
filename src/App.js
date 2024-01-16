@@ -22,6 +22,7 @@ import Cart from "./components/core/Dashboard/Cart"
 import Catalog from "./pages/Catalog"
 import ViewCourse from './pages/ViewCourse';
 import VideoDetails from './components/core/ViewCourse/VideoDetails';
+import EditCourse from "./components/core/Dashboard/EditCourse"
 // import Contact from "./pages/Contact"
 import CourseDetails from "./pages/CourseDetails"
 
@@ -86,6 +87,10 @@ function App() {
             <>
               <Route path="dashboard/add-course" element={<AddCourse />} />
               <Route path="dashboard/my-courses" element={<MyCourses />} />
+              <Route
+                path="dashboard/edit-course/:courseId"
+                element={<EditCourse />}
+              />
             </>
           )}
           {user?.accountType === ACCOUNT_TYPE.STUDENT && (

@@ -72,7 +72,7 @@ export default function ChipInput({
         {chips.map((chip, index) => (
           <div
             key={index}
-            className="m-1 flex items-center rounded-full bg-yellow-400 px-2 py-1 text-sm text-richblack-5"
+            className="m-1 flex items-center rounded-full bg-yellow-400 px-2 py-1 text-sm text-richblack-5 "
           >
             {/* Render the chip value */}
             {chip}
@@ -93,7 +93,7 @@ export default function ChipInput({
           type="text"
           placeholder={placeholder}
           onKeyDown={handleKeyDown}
-          className="form-style w-full p-2"
+          className="form-style w-full p-2 placeholder:text-black text-black"
         />
       </div>
       {/* Render an error message if the input is required and not filled */}

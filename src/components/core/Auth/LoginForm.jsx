@@ -53,19 +53,19 @@ const LoginForm = () => {
       <span className='font-light text-gray-300 mb-8'>Please Enter Your details</span>
       <div className='py-4 '>
         <span className='mb-10 text-md'>E-mail</span>
-        <input name="email" value={formData.email} onChange={handleFormData} type='email' className=' w-full p-2 border border-gray-300 rounded-md placeholder:font-light placeholder:text-gray-500' id="email" />
+        <input name="email" value={formData.email} onChange={handleFormData} type='email' className=' w-full p-2 border text-black border-gray-300 rounded-md placeholder:font-light placeholder:text-gray-500' id="email" />
       </div>
       <div className=' py-4'>
         <span className='mb-2 text-md'>Password</span>
-        <input name="password" value={formData.password} onChange={handleFormData} type="password" nme="pass" id="pass" className=' w-full p-2 border border-gray-300 rounded-md placeholder:font-light placeholder:text-gray-500' />
+        <input name="password" value={formData.password} onChange={handleFormData} type="password" nme="pass" id="pass" className=' w-full p-2 text-black border border-gray-300 rounded-md placeholder:font-light placeholder:text-gray-500' />
       </div>
-      <div className='flex justify-between w-full py-4'>
+      {/* <div className='flex justify-between w-full py-4'>
         <div className=" mr-24">
           <input type="checkbox" name="ch" id="ch" className='mr-2' />
           <span className=' text-md'>Remember for 30 days</span>
         </div>
         <span className=' font-bold text-md'>forgot password ?</span>
-      </div>
+      </div> */}
       <button className=' w-full bg-black text-white p-2 rounded-lg mb-6 duration-100 ease-in-out hover:bg-white hover:text-black hover:border hover:border-gray-300' type="submit">Sign in</button>
       <button className=' w-full border border-gray-300 text-base p-2 rounded-lg mb-6 duration-100 ease-in-out hover:bg-black hover:text-white ' > Sign in with Google</button>
       <div className=' text-center text-pure-greys-400 '>

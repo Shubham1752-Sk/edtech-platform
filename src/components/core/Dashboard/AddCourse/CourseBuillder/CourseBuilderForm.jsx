@@ -17,6 +17,7 @@ import {
 } from "../../../../../slices/CourseSlice"
 import IconBtn from "../../../../common/IconBtn"
 import NestedView from "./NestedView"
+import Spinner from "../../../../common/Spinner"
 
 export default function CourseBuilderForm() {
   const {
@@ -113,7 +114,7 @@ export default function CourseBuilderForm() {
             disabled={loading}
             placeholder="Add a section to build your course"
             {...register("sectionName", { required: true })}
-            className="form-style w-full p-2"
+            className="form-style w-full p-2 text-black"
           />
           {errors.sectionName && (
             <span className="ml-2 text-xs tracking-wide text-pink-200">
@@ -153,7 +154,7 @@ export default function CourseBuilderForm() {
           Back
         </button>
         <IconBtn disabled={loading} text="Next" onclick={goToNext}>
-          <MdNavigateNext />
+          { loading ? <Spinner /> : <MdNavigateNext />}
         </IconBtn>
       </div>
     </div>

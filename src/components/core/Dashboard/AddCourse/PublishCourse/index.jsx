@@ -33,6 +33,9 @@ export default function PublishCourse() {
   }
 
   const handleCoursePublish = async () => {
+    console.log(getValues('public'))
+    // const courseStatus = getValues('public')
+    
     // check if form has been updated or not
     if (
       (course?.status === COURSE_STATUS.PUBLISHED &&
@@ -51,6 +54,8 @@ export default function PublishCourse() {
       : COURSE_STATUS.DRAFT
     formData.append("status", courseStatus)
 
+    console.log("course Status: ",courseStatus)
+    // return
     const payload = {
       courseId: course._id,
       status: courseStatus,

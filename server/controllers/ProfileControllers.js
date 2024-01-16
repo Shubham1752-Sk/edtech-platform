@@ -56,6 +56,7 @@ exports.getUserDetails = async (req, res) => {
           SubsectionLength +=
             userDetails.courses[i].courseContent[j].subSection.length
         }
+        // console.log("Subsection Length: ",SubsectionLength)
         let courseProgressCount = await CourseProgress.findOne({
           courseID: userDetails.courses[i]._id,
           userId: userId,

@@ -31,16 +31,17 @@ const VideoDetails = () => {
       if (!courseId && !sectionId && !subSectionId) {
         navigate(`/dashboard/enrolled-courses`)
       } else {
-        // console.log("courseSectionData", courseSectionData)
+        console.log("courseSectionData", courseSectionData)
         const filteredData = courseSectionData.filter(
           (course) => course._id === sectionId
         )
-        // console.log("filteredData", filteredData)
+        console.log("filteredData", filteredData)
         const filteredVideoData = filteredData?.[0]?.subSection.filter(
           (data) => data._id === subSectionId
         )
-        // console.log("filteredVideoData", filteredVideoData)
+        console.log("filteredVideoData", filteredVideoData)
         setVideoData(filteredVideoData[0])
+        // console.log(videoData)
         setPreviewSource(courseEntireData.thumbnail)
         setVideoEnded(false)
       }
@@ -169,7 +170,7 @@ const VideoDetails = () => {
   }
 
   return (
-    <div className="flex flex-col gap-5 text-white">
+    <div className=" relative flex flex-col gap-5 text-white">
       {!videoData ? (
         <img
           src={previewSource}

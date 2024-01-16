@@ -4,6 +4,7 @@ import { Outlet, useParams } from "react-router-dom"
 
 import CourseReviewModal from "../components/core/ViewCourse/CourseReviewModal"
 import VideoDetailsSidebar from "../components/core/ViewCourse/VideoDetailsSidebar"
+import Certificate from "../components/core/ViewCourse/Certificate"
 import { getFullDetailsOfCourse } from "../services/operations/CourseAPI"
 import {
   setCompletedLectures,
@@ -17,6 +18,8 @@ export default function ViewCourse() {
   const { token } = useSelector((state) => state.auth)
   const dispatch = useDispatch()
   const [reviewModal, setReviewModal] = useState(false)
+  const [viewCertificate, setViewCertificate] = useState(false)
+  const [certificatePayload, setCertificatePayload] = useState("")
 
   useEffect(() => {
     ;(async () => {
@@ -37,7 +40,7 @@ export default function ViewCourse() {
   return (
     <>
       <div className="relative flex min-h-[calc(100vh-3.5rem)]">
-        <VideoDetailsSidebar setReviewModal={setReviewModal} />
+        <VideoDetailsSidebar setReviewModal={setReviewModal} setViewCertificate={setViewCertificate} setCertificatePayload={setCertificatePayload} />
         <div className="h-[calc(100vh-3.5rem)] flex-1 overflow-auto">
           <div className="mx-6">
             <Outlet />
@@ -45,6 +48,7 @@ export default function ViewCourse() {
         </div>
       </div>
       {reviewModal && <CourseReviewModal setReviewModal={setReviewModal} />}
+      { viewCertificate && <Certificate payload={certificatePayload} setViewCertificate={setViewCertificate} />}
     </>
   )
 }

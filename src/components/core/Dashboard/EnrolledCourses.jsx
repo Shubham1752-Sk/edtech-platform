@@ -8,6 +8,8 @@ import { getUserEnrolledCourses } from "../../../services/operations/ProfileAPI"
 
 export default function EnrolledCourses() {
   const { token } = useSelector((state) => state.auth)
+  const viewCourse = useSelector((state)=>state.viewCourse)
+  console.log("View Course is: ",viewCourse)
   const navigate = useNavigate()
 
   const [enrolledCourses, setEnrolledCourses] = useState(null)

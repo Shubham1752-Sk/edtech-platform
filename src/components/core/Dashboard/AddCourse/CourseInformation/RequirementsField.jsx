@@ -50,7 +50,7 @@ export default function RequirementsField({
           id={name}
           value={requirement}
           onChange={(e) => setRequirement(e.target.value)}
-          className="form-style w-full p-2"
+          className="form-style w-full p-2 placeholder:text-black"
         />
         <button
           type="button"
@@ -67,7 +67,7 @@ export default function RequirementsField({
               <span>{requirement}</span>
               <button
                 type="button"
-                className="ml-2 text-xs text-pure-greys-300 "
+                className="ml-2 text-xs text-pure-greys-300 text-black"
                 onClick={() => handleRemoveRequirement(index)}
               >
                 clear
